@@ -6,7 +6,7 @@
 *.tmp
 *.tmp
 vgcore*
-antman
-giantman
+antman/antman
+giantman/giantman
 *.antman
 *.giantman
