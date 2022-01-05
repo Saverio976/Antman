@@ -1,0 +1,12 @@
+*.o
+*.a
+*.gcno
+*.gcda
+*.out
+*.tmp
+*.tmp
+vgcore*
+antman
+giantman
+*.antman
+*.giantman
