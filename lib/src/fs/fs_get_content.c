@@ -66,7 +66,6 @@ static fs_content_t *fill_buffer(int fd, fs_content_t *content, int size)
 fs_content_t *fs_get_content(char const *path)
 {
     fs_content_t *content;
-    char *buffer = NULL;
     int size = 0;
     int fd = fs_open_ronly(path);
 
@@ -78,7 +77,7 @@ fs_content_t *fs_get_content(char const *path)
         return (error_size(size, fd));
     }
     content = malloc_struct(fd, size);
-    if (buffer == NULL) {
+    if (content == NULL) {
         return (NULL);
     }
     content = fill_buffer(fd, content, size);
