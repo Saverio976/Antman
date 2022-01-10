@@ -10,40 +10,62 @@
 #include "my_fs.h"
 #include "my_strings.h"
 
-static char *error_size(int size, int fd)
+static fs_content_t *error_size(int size, int fd)
 {
-    char *str;
+    fs_content_t *content;
 
     close(fd);
     if (size < 0) {
         return (NULL);
     }
-    str = malloc(sizeof(char));
-    str[0] = '\0';
-    return (str);
+    content = malloc(sizeof(fs_content_t));
+    if (content == NULL) {
+        return (NULL);
+    }
+    content->content = malloc(sizeof(char));
+    if (content->content == NULL) {
+        free(content);
+        return (NULL);
+    }
+    content->size = 0;
+    content->content[0] = '\0';
+    return (content);
 }
 
-static char *error_malloc(int fd)
+static fs_content_t *malloc_struct(int fd, int size)
 {
-    close(fd);
-    return (NULL);
-}
+    fs_content_t *content = malloc(sizeof(fs_content_t));
 
-static char *fill_buffer(int fd, char *buffer, int size)
-{
-    int nbyte = read(fd, buffer, size);
-
-    if (nbyte != size) {
-        free(buffer);
+    if (content == NULL) {
         close(fd);
         return (NULL);
     }
-    buffer[size] = '\0';
-    return (buffer);
+    content->content = malloc(sizeof(char) * (size + 1));
+    if (content->content == NULL) {
+        free(content);
+        close(fd);
+        return (NULL);
+    }
+    return (content);
 }
 
-char *fs_get_content(char const *path)
+static fs_content_t *fill_buffer(int fd, fs_content_t *content, int size)
 {
+    int nbyte = read(fd, content->content, size);
+
+    if (nbyte != size) {
+        free(content->content);
+        free(content);
+        close(fd);
+        return (NULL);
+    }
+    content->content[size] = '\0';
+    return (content);
+}
+
+fs_content_t *fs_get_content(char const *path)
+{
+    fs_content_t *content;
     char *buffer = NULL;
     int size = 0;
     int fd = fs_open_ronly(path);
@@ -55,10 +77,10 @@ char *fs_get_content(char const *path)
     if (size <= 0) {
         return (error_size(size, fd));
     }
-    buffer = malloc(sizeof(char) * (size + 1));
+    content = malloc_struct(fd, size);
     if (buffer == NULL) {
-        return (error_malloc(fd));
+        return (NULL);
     }
-    buffer = fill_buffer(fd, buffer, size);
-    return (buffer);
+    content = fill_buffer(fd, content, size);
+    return (content);
 }

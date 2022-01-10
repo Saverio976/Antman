@@ -8,8 +8,15 @@
 #ifndef MY_FS_H_
     #define MY_FS_H_
 
+typedef struct fs_content_t fs_content_t;
+
+struct fs_content_t {
+    char *content;
+    int size;
+};
+
 // get content of file
-char *fs_get_content(char const *);
+fs_content_t *fs_get_content(char const *);
 
 // get size of file
 int fs_get_size(char const *);
