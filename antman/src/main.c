@@ -19,6 +19,6 @@ int main(int ac, char **av)
     if (buff == NULL)
         return (84);
     my_putstr(buff);
-    free(buff);
+    launch_parsing(buff);
     return (0);
 }
