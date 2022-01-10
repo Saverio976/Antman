@@ -5,6 +5,7 @@
 ** try to transform a string to an int
 */
 
+#include <stddef.h>
 #include "my_strings.h"
 
 int my_getnbr(char const *str)
@@ -13,7 +14,7 @@ int my_getnbr(char const *str)
     int nb_minus = 0;
     int result = 0;
 
-    if (!*str)
+    if (str == NULL)
         return (0);
     while (my_strinclude("\b\t\n\v\f\r ", str[i]))
         i++;
