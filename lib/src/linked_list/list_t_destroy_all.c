@@ -24,6 +24,7 @@ void list_t_destroy_all(list_t *list)
         cursor = tmp;
     }
     if (cursor) {
+        free(cursor->word);
         free(cursor);
     }
 }
