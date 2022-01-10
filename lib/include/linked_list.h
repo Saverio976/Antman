@@ -23,6 +23,8 @@ list_t *list_t_contains(list_t *, char *);
 
 list_t *list_t_get_index(list_t *, unsigned int);
 
+void list_t_print_debug(list_t *);
+
 void list_t_destroy_all(list_t *);
 
 #endif
