@@ -8,6 +8,8 @@
 #ifndef ANTMAN_H_
     #define ANTMAN_H_
 
-int launch_parsing(char *buffer);
+    #include "linked_list.h"
+
+list_t *launch_parsing(char *buffer);
 
 #endif
