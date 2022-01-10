@@ -19,7 +19,7 @@ void list_t_print_debug(list_t *list)
     my_printf("list[%d] = '%s'\n", list->index, list->word);
     cursor = list->next;
     while (cursor != NULL && cursor != list) {
-        my_printf("list[%d] = '%s'\n", list->index, list->word);
+        my_printf("list[%d] = '%s'\n", cursor->index, cursor->word);
         cursor = cursor->next;
     }
 }
