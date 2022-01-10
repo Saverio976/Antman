@@ -1,0 +1,28 @@
+/*
+** EPITECH PROJECT, 2022
+** ANTMAN
+** File description:
+** implement a linked list
+*/
+
+#ifndef LINKED_LIST_H_
+    #define LINKED_LIST_H_
+
+typedef struct list_t list_t;
+
+struct list_t {
+    list_t *prev;
+    list_t *next;
+    char *word;
+    unsigned int index;
+};
+
+list_t *list_t_add(list_t *, char *);
+
+list_t *list_t_contains(list_t *, char *);
+
+list_t *list_t_get_index(list_t *, unsigned int);
+
+void list_t_destroy_all(list_t *);
+
+#endif
