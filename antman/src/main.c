@@ -8,10 +8,13 @@
 #include <stdlib.h>
 #include "my_fs.h"
 #include "my_puts.h"
+#include "linked_list.h"
+#include "antman.h"
 
 int main(int ac, char **av)
 {
     char *buff;
+    list_t *list;
 
     if (ac < 2)
         return (84);
@@ -19,6 +22,7 @@ int main(int ac, char **av)
     if (buff == NULL)
         return (84);
     my_putstr(buff);
-    launch_parsing(buff);
+    list = launch_parsing(buff);
+    list_t_destroy_all(list);
     return (0);
 }
