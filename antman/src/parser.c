@@ -24,6 +24,19 @@ static int get_nb_spaces(char *buffer)
     return (nb_spaces);
 }
 
+static void take_word_space(int nb_spaces, char *buffer, int *i, list_t **list)
+{
+    char *word = NULL;
+
+    if (nb_spaces <= 1) {
+        return;
+    }
+    word = malloc(sizeof(char) * (nb_spaces + 1));
+    get_word_value(word, &buffer[*i], nb_spaces);
+    *list = list_t_add(*list, word);
+    *i += nb_spaces - 1;
+}
+
 list_t *launch_parsing(char *buffer)
 {
     int word_len = 0;
@@ -38,12 +51,7 @@ list_t *launch_parsing(char *buffer)
             get_word_value(word, &buffer[i - word_len], word_len);
             list = list_t_add(list, word);
             word_len = 0;
-            if (nb_spaces > 1) {
-                word = malloc(sizeof(char) * (nb_spaces + 1));
-                get_word_value(word, &buffer[i], nb_spaces);
-                list = list_t_add(list, word);
-                i += nb_spaces - 1;
-            }
+            take_word_space(nb_spaces, buffer, &i, &list);
         } else {
             word_len++;
         }
