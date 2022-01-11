@@ -81,5 +81,8 @@ list_t *launch_parsing(char *buffer)
             word_len++;
         }
     }
+    if (list->next == list) {
+        list->frequency -= 1;
+    }
     return (print_dico(list));
 }
