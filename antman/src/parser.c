@@ -56,7 +56,7 @@ list_t *print_dico(list_t *head)
 
     while (current != head) {
         my_printf("%s", current->word);
-        if (current->next != head)  
+        if (current->next != head)
             my_printf("@");
         current = current->next;
     }
