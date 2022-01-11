@@ -74,7 +74,7 @@ list_t *launch_parsing(char *buffer)
         nb_spaces = get_nb_spaces(&buffer[i]);
         if (nb_spaces || !buffer[i + 1]) {
             set_word_value(word, &buffer[i - word_len], word_len, &list);
-            my_printf("current last word = %s\n", list->word);
+            my_printf("current last word = %s\n", list->prev->word);
             word_len = 0;
             take_word_space(nb_spaces, buffer, &i, &list);
         } else {
