@@ -12,4 +12,6 @@
 
 list_t *launch_parsing(char *buffer);
 
+list_t *print_dico(list_t *head);
+
 #endif

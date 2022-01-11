@@ -14,6 +14,7 @@ struct list_t {
     list_t *prev;
     list_t *next;
     char *word;
+    unsigned int frequency;
     unsigned int index;
 };
 

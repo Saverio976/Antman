@@ -25,6 +25,7 @@ list_t *list_t_add(list_t *list, char *data)
     new->prev = list->prev;
     new->next = list;
     new->index = list->prev->index + 1;
+    new->frequency = 0;
     list->prev->next = new;
     list->prev = new;
     return (list);
