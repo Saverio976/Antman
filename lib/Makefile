@@ -24,7 +24,7 @@ SRC		=	$(shell find $(SRCDIR) -name '*.c')
 
 OBJ		:=	$(SRC:%.c=%.o)
 
-CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic
+CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic -g3
 
 # ----------------------------------------------------------------------------
 
