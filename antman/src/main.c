@@ -6,18 +6,19 @@
 */
 
 #include <stdlib.h>
+#include "project.h"
 #include "my_fs.h"
 #include "my_puts.h"
-#include "linked_list.h"
-#include "antman.h"
 
-int main(int ac, char **av)
+int starter_main(char const *file, int type)
 {
     fs_content_t *buff;
 
-    if (ac < 2)
+    my_putnbr(type);
+    if (type != 1 && type != 2 && type != 3) {
         return (84);
-    buff = fs_get_content(av[1]);
+    }
+    buff = fs_get_content(file);
     if (buff == NULL)
         return (84);
     my_putstr(buff->content);
