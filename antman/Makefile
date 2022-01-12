@@ -20,7 +20,8 @@ SRCDIR		=	src/
 
 VPATH		=	$(SRCDIR)
 
-SRC		=	$(shell find $(SRCDIR) -name '*.c')
+SRC		=	$(shell find $(SRCDIR) -name '*.c') \
+			$(shell find ../$(SRCDIR) -name '*.c')
 
 OBJ		:=	$(SRC:%.c=%.o)
 
@@ -40,7 +41,7 @@ all:	init $(TARGET) ## Call $(TARGET)
 
 $(TARGET):	CURR_RULE = $(TARGET)
 $(TARGET):	init $(OBJ) ## Build the lib
-	@$(CC) $(OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
+	@$(CC) $(OBJ) $(SAME_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
 	@echo -e $(GREEN)[finished]: $(TARGET): make $(CURR_RULE)$(RESET)
 
 init:

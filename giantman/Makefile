@@ -20,7 +20,8 @@ SRCDIR		=	src/
 
 VPATH		=	$(SRCDIR) include/
 
-SRC		=	$(shell find $(SRCDIR) -name '*.c')
+SRC		=	$(shell find $(SRCDIR) -name '*.c') \
+			$(shell find ../$(SRCDIR) -name '*.c')
 
 OBJ		:=	$(SRC:%.c=%.o)
 
