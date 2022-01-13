@@ -18,6 +18,9 @@ struct fs_content_t {
 // get content of file
 fs_content_t *fs_get_content(char const *);
 
+// free the result of fs_get_content
+void fs_content_t_free(fs_content_t *);
+
 // get size of file
 int fs_get_size(char const *);
 

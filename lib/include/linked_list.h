@@ -13,14 +13,14 @@ typedef struct list_t list_t;
 struct list_t {
     list_t *prev;
     list_t *next;
-    char *word;
+    char word;
     unsigned int frequency;
     unsigned int index;
 };
 
-list_t *list_t_add(list_t *, char *);
+list_t *list_t_add(list_t *, char);
 
-list_t *list_t_contains(list_t *, char *);
+list_t *list_t_contains(list_t *, char);
 
 list_t *list_t_get_index(list_t *, unsigned int);
 
