@@ -8,29 +8,26 @@
 #ifndef BINARY_TREE_H_
     #define BINARY_TREE_H_
 
-typedef struct binary_tree_t binary_tree_t;
 typedef struct node_t node_t;
-
-struct binary_tree_t {
-    node_t *first;
-    node_t *priv_cursor;
-};
 
 struct node_t {
     char c;
     int is_child;
+    int fat;
     node_t *left;
     node_t *right;
+    node_t *prev;
+    node_t *next;
 };
 
-binary_tree_t *binary_tree_t_create(void);
+node_t *node_t_as_list_add_char(node_t *list, char c);
 
-binary_tree_t *binary_tree_t_push_huffman(binary_tree_t *, char);
+node_t *node_t_as_list_add_node(node_t *list, node_t *node);
 
-void binary_tree_t_to_infix(binary_tree_t *);
+node_t *node_t_as_node_create_from(node_t *node_left, node_t *node_right);
 
-binary_tree_t *binary_tree_t_from_infix(const char *, int);
+node_t *node_t_as_list_pop_less(node_t *list);
 
-void binary_tree_t_destroy(binary_tree_t *);
+
 
 #endif
