@@ -26,6 +26,10 @@ list_t *list_t_get_index(list_t *, unsigned int);
 
 void list_t_print_debug(list_t *);
 
+void list_t_pop(list_t **);
+
 void list_t_destroy_all(list_t *);
+
+list_t *list_t_pop_less_frequency(list_t **);
 
 #endif
