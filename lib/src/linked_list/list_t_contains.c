@@ -9,7 +9,7 @@
 #include "my_strings.h"
 #include "linked_list.h"
 
-list_t *list_t_contains(list_t *list, char *data)
+list_t *list_t_contains(list_t *list, char data)
 {
     list_t *cursor;
     int is_find = 0;
@@ -19,7 +19,7 @@ list_t *list_t_contains(list_t *list, char *data)
     }
     cursor = list->next;
     while (cursor != NULL && cursor != list && is_find == 0) {
-        if (my_strcmp(cursor->word, data) == 0) {
+        if (cursor->word == data) {
             is_find = 1;
         } else {
             cursor = cursor->next;

@@ -18,7 +18,7 @@ static void update_link_list(list_t *list, list_t *new)
     list->prev = new;
 }
 
-list_t *list_t_add(list_t *list, char *data)
+list_t *list_t_add(list_t *list, char data)
 {
     list_t *new;
     list_t *tmp;

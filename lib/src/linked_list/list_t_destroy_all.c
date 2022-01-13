@@ -19,12 +19,10 @@ void list_t_destroy_all(list_t *list)
     cursor = list->next;
     while (cursor != NULL && cursor != list) {
         tmp = cursor->next;
-        free(cursor->word);
         free(cursor);
         cursor = tmp;
     }
     if (cursor) {
-        free(cursor->word);
         free(cursor);
     }
 }
