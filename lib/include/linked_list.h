@@ -13,7 +13,8 @@ typedef struct list_t list_t;
 struct list_t {
     list_t *prev;
     list_t *next;
-    char word;
+    unsigned char path;
+    int nb_bit;
     unsigned int frequency;
     unsigned int index;
 };
