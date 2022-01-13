@@ -14,7 +14,7 @@ int set_bit(unsigned char *content, char value, int index)
     static int nb_bits = 0;
 
     if (nb_bits < 8) {
-        content[index] << 1;
+        content[index] = content[index] << 1;
         content[index] += value;
         nb_bits++;
     } else {
