@@ -33,6 +33,8 @@ void node_t_as_node_destroy_all(node_t *node);
 
 int node_t_as_node_postfix(node_t *node);
 
+node_t *node_t_as_list_pop_last(node_t **list);
+
 // TODO: pop last
 
 #endif
