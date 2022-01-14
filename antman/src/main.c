@@ -13,33 +13,24 @@
 #include "my_puts.h"
 #include "antman.h"
 
-static binary_tree_t *convert_list_to_binary(list_t *list)
-{
-    binary_tree_t *tree = binary_tree_t_create();
-    list_t *tmp;
-
-    while (list != NULL) {
-        tmp = list_t_pop_less_frequency(&list);
-        binary_tree_t_push_huffman(tree, tmp->word);
-    }
-    return (tree);
-}
-
 int starter_main(char const *file, int type)
 {
     fs_content_t *buff;
     list_t *list;
-    binary_tree_t *tree;
+    node_t *node;
+    int nb_last;
 
-    my_putnbr(type);
     if (type != 1 && type != 2 && type != 3) {
         return (84);
     }
     buff = fs_get_content(file);
     if (buff == NULL)
         return (84);
-    list = get_list_from_buff(buff->content, buff->size);
-    tree = convert_list_to_binary(list);
+    init_tree_list(&node, &list, buff);
+    nb_last = print_huffman(buff->content, list);
+    write_header(0, nb_last); // TODO
     fs_content_t_free(buff);
+    list_t_destroy_all(list);
+    node_t_as_node_destroy_all(node);
     return (0);
 }
