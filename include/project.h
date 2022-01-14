@@ -13,7 +13,7 @@ typedef struct header_t header_t;
 struct header_t {
     unsigned int dico_size;
     short int size_minus_byte;
-};
+} __attribute__((packed));
 
 header_t read_header(int fd);
 
