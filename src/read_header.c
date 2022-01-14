@@ -6,11 +6,12 @@
 */
 
 #include <unistd.h>
+#include "project.h"
 
-unsigned int read_header(int fd)
+header_t read_header(int fd)
 {
-    unsigned int buff;
+    header_t buff;
 
-    read(fd, &buff, sizeof(unsigned int));
+    read(fd, &buff, sizeof(header_t));
     return (buff);
 }

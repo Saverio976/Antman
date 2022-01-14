@@ -6,8 +6,11 @@
 */
 
 #include <unistd.h>
+#include "project.h"
 
-void write_header(unsigned int dico_char_size)
+void write_header(unsigned int dico_char_size, short int size_minus_byte)
 {
-    write(1, &dico_char_size, sizeof(unsigned int));
+    header_t head = {dico_char_size, size_minus_byte};
+
+    write(1, &head, sizeof(header_t));
 }
