@@ -81,5 +81,6 @@ fs_content_t *fs_get_content(char const *path)
         return (NULL);
     }
     content = fill_buffer(fd, content, size);
+    content->size = size;
     return (content);
 }
