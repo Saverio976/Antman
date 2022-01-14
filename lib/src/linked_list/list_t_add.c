@@ -16,6 +16,7 @@ list_t *list_t_add(list_t *list, char path)
         return (NULL);
     }
     new->path = path;
+    new->nb_bit = 0;
     if (list == NULL) {
         new->prev = new;
         new->next = new;
