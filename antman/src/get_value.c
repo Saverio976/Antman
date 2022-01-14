@@ -29,12 +29,11 @@ int set_bit(unsigned char *content, char value, int index)
 }
 
 int get_code(list_t *list, char c, unsigned char *content, int index) {
-    list_t *node = list_t_contains(list, c);
+    list_t *node = list_t_get_index(list, c);
     int nb_bit = 0;
 
     for (int i = 0; i < node->nb_bit; i++)
         nb_bit = set_bit(content, node->path & 1 << i, index);
-
     return (nb_bit);
 }
 
@@ -42,12 +41,10 @@ int print_huffman(char *str, list_t *list)
 {
     static unsigned char buffer[1024] = {0};
     static int index = 0;
-
     int nb_bit = 0;
 
     for (int i = 0; str[i]; i++)
         nb_bit = get_code(list, str[i], buffer, index);
-
     write(1, buffer, index);
     return (8 - nb_bit);
 }
