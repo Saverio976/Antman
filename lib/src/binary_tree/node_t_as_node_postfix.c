@@ -6,10 +6,25 @@
 */
 
 #include <stddef.h>
+#include <unistd.h>
 #include "binary_tree.h"
 #include "my_puts.h"
 
-int node_t_as_node_postfix(node_t *node)
+static void print_postfix_buffer(char c, int is_end)
+{
+    static char buff[255];
+    static int index = 0;
+
+    if (index + 1  > 255 || is_end) {
+        write(1, buff, index);
+        index = 0;
+    }
+    if (is_end == 0) {
+        buff[index++] = c;
+    }
+}
+
+static int print_to_postfix_rec(node_t *node)
 {
     int chars = 0;
 
@@ -20,9 +35,17 @@ int node_t_as_node_postfix(node_t *node)
         if (node->right != NULL) {
             chars += node_t_as_node_postfix(node->right);
         }
-        my_putchar('\0');
+        print_postfix_buffer('\0', 0);
     } else {
-        my_putchar(node->c);
+        print_postfix_buffer(node->c, 0);
     }
     return (chars + 1);
+}
+
+int node_t_as_node_postfix(node_t *node)
+{
+    int chars = print_to_postfix_rec(node);
+
+    print_postfix_buffer('\0', 1);
+    return (chars);
 }

@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "binary_tree.h"
 
-node_t *node_t_as_list_contains(node_t *list, char c)
+node_t *node_t_as_list_contains(node_t *list, unsigned char c)
 {
     node_t *tmp = list;
     int condition = 1;

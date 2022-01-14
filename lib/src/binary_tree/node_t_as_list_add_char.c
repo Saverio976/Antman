@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "binary_tree.h"
 
-node_t *node_t_as_list_add_char(node_t *list, char c)
+node_t *node_t_as_list_add_char(node_t *list, unsigned char c)
 {
     node_t *new = malloc(sizeof(node_t));
 

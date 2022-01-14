@@ -18,6 +18,7 @@ node_t *node_t_as_node_create_from(node_t *node_left, node_t *node_right)
     node->is_child = 0;
     node->left = node_left;
     node->right = node_right;
-    node->fat = node_left->fat + node_right->fat;
+    node->fat = (node_left != NULL) ? node_left->fat : 0;
+    node->fat += (node_right != NULL) ? node_right->fat : 0;
     return (node);
 }
