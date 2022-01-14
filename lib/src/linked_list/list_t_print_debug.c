@@ -16,12 +16,12 @@ void list_t_print_debug(list_t *list)
     if (list == NULL) {
         return;
     }
-    my_printf("list[%d] = '%c' and frequency: %d\n", list->index, list->word,
-            list->frequency);
+    my_printf("list[%d] (char %c) = '%c'\n", list->index,
+            list->index, list->path);
     cursor = list->next;
     while (cursor != NULL && cursor != list) {
-        my_printf("list[%d] = '%c' and frequency: %d\n", cursor->index,
-                cursor->word, cursor->frequency);
+        my_printf("list[%d] (char %c) = '%c'\n", cursor->index,
+                cursor->index, cursor->path);
         cursor = cursor->next;
     }
 }
