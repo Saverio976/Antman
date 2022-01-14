@@ -28,10 +28,13 @@ int set_bit(unsigned char *content, char value, int index)
     return (nb_bits);
 }
 
-int get_code(list_t *list, char c, unsigned char *content, int index) {
+int get_code(list_t *list, unsigned char c, unsigned char *content, int index) {
     list_t *node = list_t_get_index(list, c);
     int nb_bit = 0;
 
+    if (node == NULL) {
+        return (0);
+    }
     for (int i = 0; i < node->nb_bit; i++)
         nb_bit = set_bit(content, node->path & 1 << i, index);
     return (nb_bit);

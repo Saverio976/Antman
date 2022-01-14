@@ -33,13 +33,13 @@ static void update_recussiv_path(node_t *node, int pad, list_t *list)
 {
     list_t *elem;
 
-    if (node->is_child == 0 && node->left != NULL) {
+    if (node != NULL && node->is_child == 0 && node->left != NULL) {
         update_recussiv_path(node->left, pad, list);
     }
-    if (node->is_child == 0 && node->right != NULL) {
+    if (node != NULL && node->is_child == 0 && node->right != NULL) {
         update_recussiv_path(node->right, pad, list);
     }
-    if (node->is_child == 1) {
+    if (node != NULL && node->is_child == 1) {
         elem = list_t_get_index(list, node->c);
         elem->path = elem->path << 1;
         elem->path += pad;

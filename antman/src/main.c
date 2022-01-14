@@ -19,6 +19,7 @@ int starter_main(char const *file, int type)
     list_t *list;
     node_t *node;
     int nb_last;
+    int nb_dico;
 
     if (type != 1 && type != 2 && type != 3) {
         return (84);
@@ -27,8 +28,9 @@ int starter_main(char const *file, int type)
     if (buff == NULL)
         return (84);
     init_tree_list(&node, &list, buff);
+    nb_dico = node_t_as_node_postfix(node);
     nb_last = print_huffman(buff->content, list);
-    write_header(0, nb_last); // TODO
+    write_header(nb_dico, nb_last); // TODO
     fs_content_t_free(buff);
     list_t_destroy_all(list);
     node_t_as_node_destroy_all(node);
