@@ -19,6 +19,12 @@ ANTMAN		=	antman/antman
 
 GIANTMAN	=	giantman/giantman
 
+CFLAGS		=	-Wall -Wextra -Wpedantic -Iinclude -Ilib/include
+
+SRC		=	$(shell find src/ -name '*.c')
+
+OBJ		=	$(SRC:.c=.o)
+
 VPATH		=	$(dir $(ANTMAN)) $(dir $(GIANTMAN)) lib/ include/ tests/
 
 TEST_BASH	=	./tests/fn_tests.sh
@@ -26,7 +32,7 @@ TEST_BASH	=	./tests/fn_tests.sh
 # ----------------------------------------------------------------------------
 
 .PHONY: all
-all:	$(LIB_TARGET) $(ANTMAN) $(GIANTMAN) ## Build lib+binary
+all:	$(LIB_TARGET) $(OBJ) $(ANTMAN) $(GIANTMAN) ## Build lib+binary
 	@echo -e $(GREEN)' -> [finished]: $(NAME): make all'$(RESET)
 
 $(ANTMAN):	## Build the binary for the antman
@@ -36,6 +42,12 @@ $(ANTMAN):	## Build the binary for the antman
 $(GIANTMAN):	## Build the binary for the giantman
 	@$(MAKE) -C $(dir $(GIANTMAN)) -s
 	@echo -e $(GREEN)' -> [finished]: $(NAME): make $(GIANTMAN)'$(RESET)
+
+debug: CFLAGS += -g3
+debug: fclean $(OBJ)
+	$(MAKE) -C $(dir $(LIB_TARGET)) debug
+	$(MAKE) -C $(dir $(ANTMAN)) debug
+	$(MAKE) -C $(dir $(GIANTMAN)) debug
 
 $(LIB_TARGET): ## Build the lib
 	@$(MAKE) -C lib/ -s

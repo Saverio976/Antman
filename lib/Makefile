@@ -24,7 +24,7 @@ SRC		=	$(shell find $(SRCDIR) -name '*.c')
 
 OBJ		:=	$(SRC:%.c=%.o)
 
-CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic -g3
+CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic
 
 # ----------------------------------------------------------------------------
 
@@ -43,6 +43,9 @@ $(TARGET):	init $(OBJ) ## Build the lib
 
 init:
 	@echo -e $(CYAN)[starting]: $(TARGET): make $(CURR_RULE) ...$(RESET)
+
+debug:	CFLAGS += -g3
+debug:	fclean all
 
 .PHONY: clean
 clean: ## Clean obj/*.o

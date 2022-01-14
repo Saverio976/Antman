@@ -47,6 +47,9 @@ $(TARGET):	init $(OBJ) ## Build the lib
 init:
 	@echo -e $(CYAN)[starting]: $(TARGET): make $(CURR_RULE) ...$(RESET)
 
+debug:	CFLAGS += -g3
+debug:	all
+
 .PHONY: clean
 clean: ## Clean obj/*.o
 	@$(RM) $(OBJ)
