@@ -15,7 +15,7 @@ struct header_t {
     short int size_minus_byte;
 } __attribute__((packed));
 
-header_t read_header(int fd);
+header_t read_header(char const *path);
 
 void write_header(unsigned int dico_char_size, short int size_minus_byte);
 
