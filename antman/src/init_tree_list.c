@@ -54,7 +54,7 @@ void init_tree_list(node_t **node, list_t **list, fs_content_t *cont)
     node_t *tmp;
 
     fill_node_list(node, list, cont);
-    for (int i = 0; i < cont->size; i++) {
+    while (node_t_as_list_len(*node) != 1) {
         node_right = node_t_as_list_pop_less(node);
         update_recussiv_path(node_right, 1, *list);
         node_left = node_t_as_list_pop_less(node);
