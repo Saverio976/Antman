@@ -5,10 +5,12 @@
 ** the main function
 */
 
+#include <unistd.h>
 #include "project.h"
 #include "my_puts.h"
 #include "my_fs.h"
-#include <unistd.h>
+#include "my_conversions.h"
+#include "my_strings.h"
 
 static int print_usage(char const *exe)
 {
@@ -31,21 +33,49 @@ static int check_file_exists(char const *file)
     return (1);
 }
 
+static int check_conversion_type(char const *nb_conv)
+{
+    int is_error = 0;
+    int res;
+
+    res = my_atoi_err(nb_conv, &is_error);
+    if (is_error == 1) {
+        return (0);
+    }
+    if (res != 1 && res != 2 && res != 3) {
+        return (0);
+    }
+    return (res);
+}
+
+static int exec_algo_project(char const *file, char const *nb)
+{
+    int type;
+    int ret_code;
+
+    if (check_file_exists(file) == 0) {
+        return (84);
+    }
+    type = check_conversion_type(nb);
+    if (type == 0) {
+        return (84);
+    }
+    ret_code = starter_main(file, type);
+    return (ret_code);
+}
+
 int main(int ac, char const *av[])
 {
+    int ret_code = 84;
+
     if (ac != 3) {
-        if (ac == 2 && av[1][0] == '-' && av[1][1] == 'h') {
-            return (print_usage(av[0]));
+        if (ac == 2 && my_strcmp(av[1], "-h") == 0) {
+            ret_code = print_usage(av[0]);
+        } else {
+            ret_code = 84;
         }
-        return (84);
-    }
-    if ((av[2][0] == '1' || av[2][0] == '2' || av[2][0] == '3') &&
-            av[2][1] == '\0') {
-        if (check_file_exists(av[1]) == 0) {
-            return (84);
-        }
-        return (starter_main(av[1], av[2][0] - '0'));
     } else {
-        return (84);
+        ret_code = exec_algo_project(av[1], av[2]);
     }
+    return (ret_code);
 }
