@@ -38,4 +38,7 @@ int my_strlen(char const *);
 // check if the first str starts with the second
 int my_strstartswith(char const *, char const *);
 
+// copy always n char from str
+char *my_strndup(char const *str, int n);
+
 #endif

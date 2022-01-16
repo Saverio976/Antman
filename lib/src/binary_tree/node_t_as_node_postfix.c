@@ -10,42 +10,45 @@
 #include "binary_tree.h"
 #include "my_puts.h"
 
-static void print_postfix_buffer(char c, int is_end)
+static int print_postfix_buffer(char c, int is_end)
 {
     static char buff[255];
     static int index = 0;
+    int tmp = 0;
 
-    if (index + 1  > 255 || is_end) {
+    if (index + 1 > 255 || is_end) {
         write(1, buff, index);
+        tmp = index;
         index = 0;
     }
     if (is_end == 0) {
         buff[index++] = c;
     }
+    return (tmp);
 }
 
-static int print_to_postfix_rec(node_t *node)
+static int print_to_postfix_rec(node_t *node, char delim)
 {
     int chars = 0;
 
     if (node->is_child == 0) {
         if (node->left != NULL) {
-            chars += node_t_as_node_postfix(node->left);
+            chars += print_to_postfix_rec(node->left, delim);
         }
         if (node->right != NULL) {
-            chars += node_t_as_node_postfix(node->right);
+            chars += print_to_postfix_rec(node->right, delim);
         }
-        print_postfix_buffer('\0', 0);
+        chars += print_postfix_buffer(delim, 0);
     } else {
-        print_postfix_buffer(node->c, 0);
+        chars += print_postfix_buffer(node->c, 0);
     }
-    return (chars + 1);
+    return (chars);
 }
 
-int node_t_as_node_postfix(node_t *node)
+int node_t_as_node_postfix(node_t *node, char delim)
 {
-    int chars = print_to_postfix_rec(node);
+    int chars = print_to_postfix_rec(node, delim);
 
-    print_postfix_buffer('\0', 1);
+    chars += print_postfix_buffer(delim, 1);
     return (chars);
 }

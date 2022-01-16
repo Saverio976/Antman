@@ -31,10 +31,12 @@ node_t *node_t_as_list_contains(node_t *list, unsigned char c);
 
 void node_t_as_node_destroy_all(node_t *node);
 
-int node_t_as_node_postfix(node_t *node);
+int node_t_as_node_postfix(node_t *node, char delim);
 
 node_t *node_t_as_list_pop_last(node_t **list);
 
-// TODO: pop last
+node_t *node_t_as_node_from_postfix(char *str, int size, char delim);
+
+int node_t_as_list_len(node_t *list);
 
 #endif
