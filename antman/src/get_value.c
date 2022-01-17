@@ -5,9 +5,9 @@
 ** gets the code of each char
 */
 
-#include "linked_list.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "linked_list.h"
 
 int set_bit(unsigned char *content, char value, int index)
 {
