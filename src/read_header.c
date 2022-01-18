@@ -16,12 +16,33 @@ static void fill_null_buff(header_t *buff)
     buff->size_minus_byte = 0;
 }
 
+static int read_fd(int fd, int size, header_t *buff)
+{
+    char *buf_text;
+    int size_mal = size - sizeof(header_t);
+
+    buf_text = malloc(size_mal + 1);
+    if (buf_text == NULL) {
+        return (0);
+    }
+    if (read(fd, buf_text, size_mal) < 0) {
+        free(buf_text);
+        fill_null_buff(buff);
+        return (0);
+    }
+    free(buf_text);
+    if (read(fd, buff, sizeof(header_t)) < 0) {
+        fill_null_buff(buff);
+        return (0);
+    }
+    return (1);
+}
+
 header_t read_header(char const *path)
 {
     header_t buff;
     int fd = fs_open_ronly(path);
     int size;
-    char *buf_text;
 
     if (fd < 0) {
         fill_null_buff(&buff);
@@ -32,9 +53,6 @@ header_t read_header(char const *path)
         fill_null_buff(&buff);
         return (buff);
     }
-    buf_text = malloc(size - sizeof(header_t));
-    read(fd, buf_text, size - sizeof(header_t));
-    read(fd, &buff, sizeof(header_t));
-    free(buf_text);
+    read_fd(fd, size, &buff);
     return (buff);
 }
