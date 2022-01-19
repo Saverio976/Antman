@@ -12,9 +12,9 @@
 #include "project.h"
 #include "binary_tree.h"
 
-static char *get_only_compressed(header_t *head, fs_content_t *cont)
+static unsigned char *get_only_compressed(header_t *head, fs_content_t *cont)
 {
-    char *compress;
+    unsigned char *compress;
     int size;
 
     if (cont == NULL) {
@@ -32,7 +32,7 @@ int starter_main(char const *file, __attribute__((unused)) int type)
 {
     fs_content_t *buff;
     header_t head;
-    char *compress;
+    unsigned char *compress;
     node_t *tree;
 
     buff = fs_get_content(file);
