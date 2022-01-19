@@ -5,23 +5,8 @@
 ** decodes the text
 */
 
-#include "binary_tree.h"
 #include <unistd.h>
-
-void decode_str(char *str, node_t *tree)
-{
-    node_t *tmp = tree;
-    static char buffer[1024];
-    static int index = 0;
-
-    for (int i = 0; str[i]; i++) {
-        tmp = get_bits(str[i], tmp, buffer, index);
-        if (tmp->c) {
-            tmp = tree;
-        }
-    }
-    write(1, buffer, index);
-}
+#include "binary_tree.h"
 
 static int check_char(char *buffer, int index, node_t *tmp)
 {
@@ -49,4 +34,19 @@ static node_t *get_bits(char c, node_t *tree, char *buffer, int index)
         index = check_char(buffer, index, tmp);
     }
     return (tmp);
+}
+
+void decode_str(char *str, node_t *tree)
+{
+    node_t *tmp = tree;
+    static char buffer[1024];
+    static int index = 0;
+
+    for (int i = 0; str[i]; i++) {
+        tmp = get_bits(str[i], tmp, buffer, index);
+        if (tmp->c) {
+            tmp = tree;
+        }
+    }
+    write(1, buffer, index);
 }
