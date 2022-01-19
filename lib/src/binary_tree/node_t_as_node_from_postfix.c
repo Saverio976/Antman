@@ -11,6 +11,7 @@
 node_t *node_t_as_node_from_postfix(char *str, int size, char delim)
 {
     node_t *node = NULL;
+    node_t *tmp;
     node_t *node_left;
     node_t *node_right;
 
@@ -20,7 +21,8 @@ node_t *node_t_as_node_from_postfix(char *str, int size, char delim)
         } else {
             node_right = node_t_as_list_pop_last(&node);
             node_left = node_t_as_list_pop_last(&node);
-            node = node_t_as_node_create_from(node_left, node_right);
+            tmp = node_t_as_node_create_from(node_left, node_right);
+            node = node_t_as_list_add_node(node, tmp);
         }
     }
     return (node);

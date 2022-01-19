@@ -31,6 +31,9 @@ static int print_to_postfix_rec(node_t *node, char delim)
 {
     int chars = 0;
 
+    if (node == NULL) {
+        return (0);
+    }
     if (node->is_child == 0) {
         if (node->left != NULL) {
             chars += print_to_postfix_rec(node->left, delim);
