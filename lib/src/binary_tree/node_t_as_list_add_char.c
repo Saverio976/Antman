@@ -11,6 +11,7 @@
 node_t *node_t_as_list_add_char(node_t *list, unsigned char c)
 {
     node_t *new = malloc(sizeof(node_t));
+    node_t *cursor;
 
     if (new == NULL) {
         return (NULL);
@@ -22,7 +23,9 @@ node_t *node_t_as_list_add_char(node_t *list, unsigned char c)
         new->next = NULL;
         return (new);
     }
-    new->next = list->next;
-    list->next = new;
+    for (cursor = list; cursor != NULL && cursor->next != NULL;
+            cursor = cursor->next);
+    new->next = cursor->next;
+    cursor->next = new;
     return (list);
 }

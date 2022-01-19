@@ -10,6 +10,8 @@
 
 node_t *node_t_as_list_add_node(node_t *list, node_t *node)
 {
+    node_t *cursor;
+
     if (node == NULL) {
         return (NULL);
     }
@@ -17,7 +19,9 @@ node_t *node_t_as_list_add_node(node_t *list, node_t *node)
         node->next = NULL;
         return (node);
     }
-    node->next = list->next;
-    list->next = node;
+    for (cursor = list; cursor != NULL && cursor->next != NULL;
+            cursor = cursor->next);
+    node->next = cursor->next;
+    cursor->next = node;
     return (list);
 }
