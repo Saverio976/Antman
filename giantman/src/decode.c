@@ -8,45 +8,47 @@
 #include <unistd.h>
 #include "binary_tree.h"
 
-static int check_char(char *buffer, int index, node_t *tmp)
+static void print_bufferer(char c, int is_end)
 {
-    if (tmp->c) {
-        buffer[index] = tmp->c;
-        index++;
-        if (index > 1024) {
-            index = 0;
-            write(1, buffer, 1024);
-        }
+    static char buf[255];
+    static int index = 0;
+
+    if (is_end || index + 1 > 255) {
+        write(1, buf, index - 1);
+        index = 0;
     }
-    return (index);
+    if (!is_end) {
+        buf[index++] = c;
+    }
 }
 
-static node_t *get_bits(char c, node_t *tree, char *buffer, int index)
+static node_t *get_bits(char c, node_t *tmp, node_t *tree, int last_nbyte)
 {
-    node_t *tmp = tree;
-
-    for (int i = 8; i > 0; i--) {
+    for (int i = 8; i > last_nbyte; i--) {
         if (c & 1 << i) {
             tmp = tmp->right;
         } else {
             tmp = tmp->left;
         }
-        index = check_char(buffer, index, tmp);
+        if (tmp->is_child) {
+            print_bufferer(tmp->c, 0);
+            tmp = tree;
+        }
     }
     return (tmp);
 }
 
-void decode_str(char *str, node_t *tree)
+void decode_str(char *str, node_t *tree, int last_nbyte)
 {
     node_t *tmp = tree;
-    static char buffer[1024];
-    static int index = 0;
+    int i = 0;
 
-    for (int i = 0; str[i]; i++) {
-        tmp = get_bits(str[i], tmp, buffer, index);
-        if (tmp->c) {
-            tmp = tree;
-        }
+    if (str == NULL || tree == NULL) {
+        return;
     }
-    write(1, buffer, index);
+    for (; str[i] != '\0' && str[i + 1] != '\0'; i++) {
+        tmp = get_bits(str[i], tmp, tree, 0);
+    }
+    get_bits(str[i], tmp, tree, last_nbyte);
+    print_bufferer('\0', 1);
 }

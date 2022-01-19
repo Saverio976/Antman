@@ -44,6 +44,7 @@ int starter_main(char const *file, __attribute__((unused)) int type)
         return (84);
     }
     tree = node_t_as_node_from_postfix(buff->content, head.dico_size, '\0');
+    decode_str(compress, tree, head.size_minus_byte);
     node_t_as_node_postfix(tree, '-');
     fs_content_t_free(buff);
     free(compress);
