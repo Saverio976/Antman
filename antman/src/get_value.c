@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "linked_list.h"
+#include "my_puts.h"
 
 static int set_bit(char value, int is_end)
 {
@@ -39,7 +40,7 @@ static int get_code(list_t *list, unsigned char c) {
     if (node == NULL) {
         return (0);
     }
-    for (int i = 0; i < node->nb_bit; i++)
+    for (int i = node->nb_bit; i > 0; i--)
         nb_bit = set_bit(node->path & 1 << i, 0);
     return (nb_bit);
 }

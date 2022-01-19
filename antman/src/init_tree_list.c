@@ -47,6 +47,28 @@ static void update_recussiv_path(node_t *node, int pad, list_t *list)
     }
 }
 
+static void reverse_recussiv_path(node_t *node, list_t *list)
+{
+    list_t *elem;
+    char tmp = 0;
+
+    if (node != NULL && node->is_child == 0 && node->left != NULL) {
+        reverse_recussiv_path(node->left, list);
+    }
+    if (node != NULL && node->is_child == 0 && node->right != NULL) {
+        reverse_recussiv_path(node->right, list);
+    }
+    if (node != NULL && node->is_child == 1) {
+        elem = list_t_get_index(list, node->c);
+        for (int i = 0; i < elem->nb_bit; i++) {
+            tmp = tmp << 1;
+            tmp += elem->path & 1;
+            elem->path = elem->path >> 1;
+        }
+        elem->path = tmp;
+    }
+}
+
 void init_tree_list(node_t **node, list_t **list, fs_content_t *cont)
 {
     node_t *node_left;
@@ -62,4 +84,5 @@ void init_tree_list(node_t **node, list_t **list, fs_content_t *cont)
         tmp = node_t_as_node_create_from(node_left, node_right);
         *node = node_t_as_list_add_node(*node, tmp);
     }
+    reverse_recussiv_path(*node, *list);
 }
