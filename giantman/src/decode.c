@@ -38,7 +38,8 @@ static node_t *get_bits(char c, node_t *tmp, node_t *tree, int last_nbyte)
     return (tmp);
 }
 
-void decode_str(unsigned char *str, node_t *tree, int last_nbyte)
+void decode_str(unsigned char *str, node_t *tree, int last_nbyte,
+    long int size)
 {
     node_t *tmp = tree;
     int i = 0;
@@ -46,12 +47,9 @@ void decode_str(unsigned char *str, node_t *tree, int last_nbyte)
     if (str == NULL || tree == NULL) {
         return;
     }
-    for (; str[i] != '\0'; i++) {
+    for (; i < size - 1; i++) {
         tmp = get_bits(str[i], tmp, tree, 0);
     }
-    printf("\nlast_nbytes = %d\n", last_nbyte);
     get_bits(str[i], tmp, tree, 8 - last_nbyte);
     print_bufferer('\0', 1);
 }
-//METTRE SIZE EN PARAMETRE POUR LA CONDITION DE FIN POUR PAS DEPASSER
-//TEST BASIC.LYR A FAIRE (E EN TROP DERNIER BITS)
