@@ -52,6 +52,5 @@ void decode_str(unsigned char *str, node_t *tree, int last_nbyte,
         tmp = get_bits(str[i], tmp, tree, 0);
     }
     get_bits(str[i], tmp, tree, last_nbyte);
-
     print_bufferer('\0', 1);
 }
