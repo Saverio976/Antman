@@ -50,7 +50,7 @@ static void update_recussiv_path(node_t *node, int pad, list_t *list)
 static void reverse_recussiv_path(node_t *node, list_t *list)
 {
     list_t *elem;
-    char tmp = 0;
+    unsigned int tmp = 0;
 
     if (node != NULL && node->is_child == 0 && node->left != NULL) {
         reverse_recussiv_path(node->left, list);
