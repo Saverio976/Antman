@@ -12,7 +12,7 @@ typedef struct fs_content_t fs_content_t;
 
 struct fs_content_t {
     char *content;
-    int size;
+    long int size;
 };
 
 // get content of file
