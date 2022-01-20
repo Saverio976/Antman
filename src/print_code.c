@@ -20,3 +20,14 @@ void print_code(char c, list_t *node)
     }
     my_putchar('\n');
 }
+
+void print_code_c(char c)
+{
+    for (int i = 7; i >= 0; i--) {
+        if (c & 1 << i)
+            my_putchar('1');
+        else
+            my_putchar('0');
+    }
+    my_putchar('\n');
+}

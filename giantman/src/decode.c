@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include "binary_tree.h"
+#include "project.h"
 
 static void print_bufferer(char c, int is_end)
 {
@@ -14,7 +15,7 @@ static void print_bufferer(char c, int is_end)
     static int index = 0;
 
     if (is_end || index + 1 > 255) {
-        write(1, buf, index - 1);
+        write(1, buf, index);
         index = 0;
     }
     if (!is_end) {
@@ -50,6 +51,7 @@ void decode_str(unsigned char *str, node_t *tree, int last_nbyte,
     for (; i < size - 1; i++) {
         tmp = get_bits(str[i], tmp, tree, 0);
     }
-    get_bits(str[i], tmp, tree, 8 - last_nbyte);
+    get_bits(str[i], tmp, tree, last_nbyte);
+
     print_bufferer('\0', 1);
 }

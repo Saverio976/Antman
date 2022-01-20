@@ -45,7 +45,6 @@ static int get_code(list_t *list, unsigned char c) {
     if (node == NULL) {
         return (0);
     }
-    //print_code(c, node);
     for (int i = node->nb_bit - 1; i >= 0; i--) {
         value = ((1 << i & node->path) > 0) ? 1 : 0;
         nb_bit = set_bit(value, 0);
@@ -59,10 +58,9 @@ short int print_huffman(char *str, list_t *list)
 
     for (int i = 0; str[i]; i++)
         nb_bit = get_code(list, str[i]);
-    for (int i = 0; i < 8 - nb_bit; i++) {
+    for (int i = nb_bit; i < 8; i++) {
         set_bit(0, 0);
     }
     set_bit(0, 1);
-    //my_printf("\nnb_bits = %d\n", nb_bit);
     return (8 - nb_bit);
 }

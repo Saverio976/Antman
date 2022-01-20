@@ -25,4 +25,6 @@ int starter_main(char const *file, int type);
 
 void decode_str(unsigned char *str, node_t *tree, int last_nbyte, long int size);
 
+void print_code_c(char c);
+
 #endif
