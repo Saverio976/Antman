@@ -23,6 +23,6 @@ void write_header(unsigned int dico_char_size, short int size_minus_byte);
 
 int starter_main(char const *file, int type);
 
-void decode_str(unsigned char *str, node_t *tree, int last_nbyte);
+void decode_str(unsigned char *str, node_t *tree, int last_nbyte, long int size);
 
 #endif
