@@ -11,6 +11,16 @@
 #include "my_puts.h"
 #include "antman.h"
 
+static void do_case_bit_height(unsigned char buf[255], int *index, int *nb_bit,
+        int value)
+{
+    buf[*index] = buf[*index] << 1;
+    buf[*index] += value;
+    (*index) += 1;
+    buf[*index] = 0;
+    *nb_bit = 0;
+}
+
 static int set_bit(int value, int is_end)
 {
     static int nb_bits = 0;
@@ -22,11 +32,7 @@ static int set_bit(int value, int is_end)
         buf[index] += value;
         nb_bits++;
     } else {
-        buf[index] = buf[index] << 1;
-        buf[index] += value;
-        index++;
-        buf[index] = 0;
-        nb_bits = 0;
+        do_case_bit_height(buf, &index, &nb_bits, value);
     }
     if (is_end || index > 255) {
         write(1, buf, index - 1);
