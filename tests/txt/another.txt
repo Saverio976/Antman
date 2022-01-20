@@ -1,2 +1,21 @@
 anflbahrvbeajbvhjabvhjreabvejavjlaevbhrebveabvjhablveabhrjeb
 avnreabveahbvjheabvhaebvhaebvhreavbleabvhebvhearbvnerbvhearb
+
+
+Headlines:
+1 democrats close in on Senate control
+2 presidential vote show down
+3 california pandemic crisis
+4 the electoral college vote will be cancelled (doesn't exist)
+
+Flash 1:
+1 true
+2 true
+3 false
+4 false
+
+Flash 2:
+1 true
+2 true
+3 false
+4 false

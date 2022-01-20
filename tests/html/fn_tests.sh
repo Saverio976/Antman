@@ -11,6 +11,7 @@ function process_file () {
 
 	echo process : $FILE_TEST ...
 
+	echo $1
 	$1 $FILE_TEST > $FILE_TEST.antman
 
 	if [[ $? != 0 ]]; then

@@ -8,11 +8,11 @@
 #include <stdlib.h>
 #include "my_strings.h"
 
-char *my_strndup(char const *str, int n)
+unsigned char *my_strndup(char const *str, int n)
 {
-    char *new;
+    unsigned char *new;
 
-    new = malloc(sizeof(char) * (n + 1));
+    new = malloc(sizeof(unsigned char) * (n + 1));
     if (new == NULL) {
         return (NULL);
     }
