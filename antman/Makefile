@@ -39,6 +39,7 @@ SRC		:=	$(SRC) \
 			../src/main.c \
 			../src/read_header.c \
 			../src/write_header.c \
+			../src/print_code.c
 
 OBJ		:=	$(SRC:%.c=%.o)
 # ----------------------------------------------------------------------------
