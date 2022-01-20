@@ -11,6 +11,7 @@ echo
 for EXE in $TESTS; do
 	./tests/$EXE $1 $2
 	if [[ $? != 0 ]]; then
+		echo salut toi
 		ERROR=1
 	fi
 done

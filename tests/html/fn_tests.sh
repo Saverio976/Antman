@@ -11,16 +11,17 @@ function process_file () {
 
 	echo process : $FILE_TEST ...
 
-	echo $1
-	$1 $FILE_TEST 1 > $FILE_TEST.antman
+	$1 "$FILE_TEST" 1 > "$FILE_TEST.antman"
 
 	if [[ $? != 0 ]]; then
+		echo ICI
 		exit 1
 	fi
 
-	$2 $FILE_TEST.antman 1 > $FILE_TEST.giantman
+	$2 "$FILE_TEST.antman" 1 > "$FILE_TEST.giantman"
 
 	if [[ $? != 0 ]];then
+		echo ET ICI
 		exit 1
 	fi
 
