@@ -12,7 +12,7 @@
     #include "binary_tree.h"
     #include "my_fs.h"
 
-int print_huffman(char *str, list_t *list);
+short int print_huffman(char *str, list_t *list);
 
 void init_tree_list(node_t **node, list_t **list, fs_content_t *cont);
 

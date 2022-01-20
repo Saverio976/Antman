@@ -51,7 +51,7 @@ static int get_code(list_t *list, unsigned char c) {
     return (nb_bit);
 }
 
-int print_huffman(char *str, list_t *list)
+short int print_huffman(char *str, list_t *list)
 {
     int nb_bit = 0;
 
