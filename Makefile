@@ -74,5 +74,7 @@ re:	fclean all ## Fclean+All
 tests_run: fn_tests_run ## The rule called by Marvin to make coverage
 
 .PHONY: fn_tests_run
-fn_tests_run: fclean $(LIB_TARGET) $(ANTMAN) $(GIANTMAN) ## Fonctional tests
+fn_tests_run: fclean $(LIB_TARGET) ## Fonctional tests
+	$(MAKE) -C $(dir $(ANTMAN)) tests_bin
+	$(MAKE) -C $(dir $(GIANTMAN)) tests_bin
 	$(TEST_BASH) ./$(ANTMAN) ./$(GIANTMAN)

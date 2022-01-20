@@ -62,3 +62,7 @@ fclean:	init clean ## Clean the binary
 
 .PHONY: re
 re:	fclean all ## Fclean+All
+
+tests_bin: CFLAGS += -fprofile-arcs -ftest-coverage
+tests_bin: LDFLAGS += -lgcov
+tests_bin: re
