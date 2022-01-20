@@ -35,7 +35,7 @@ static int set_bit(int value, int is_end)
         do_case_bit_height(buf, &index, &nb_bits, value);
     }
     if (is_end || index > 255) {
-        write(1, buf, index - 1);
+        write(1, buf, index);
         index = 0;
         nb_bits = 0;
         return (nb_bits);
@@ -62,9 +62,10 @@ short int print_huffman(char *str, list_t *list)
 {
     int nb_bit = 0;
 
-    for (int i = 0; str[i]; i++)
+    for (int i = 0; str[i]; i++) {
         nb_bit = get_code(list, str[i]);
-    for (int i = nb_bit; i < 8; i++) {
+    }
+    for (int i = nb_bit; i < 7; i++) {
         set_bit(0, 0);
     }
     set_bit(0, 1);

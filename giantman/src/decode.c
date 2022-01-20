@@ -25,7 +25,7 @@ static void print_bufferer(char c, int is_end)
 
 static node_t *get_bits(char c, node_t *tmp, node_t *tree, int last_nbyte)
 {
-    for (int i = 8 - 1; i >= last_nbyte; i--) {
+    for (int i = 7; i >= last_nbyte; i--) {
         if (c & 1 << i) {
             tmp = tmp->right;
         } else {
