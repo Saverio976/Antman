@@ -18,7 +18,7 @@ int starter_main(char const *file, __attribute__((unused)) int type)
     fs_content_t *buff;
     list_t *list;
     node_t *node;
-    int nb_last;
+    short int nb_last;
     int nb_dico;
 
     buff = fs_get_content(file);
