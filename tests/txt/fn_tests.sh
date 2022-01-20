@@ -45,4 +45,7 @@ function process_file () {
 for FILE in `find . -name '*.txt' -type f -print`; do
 	process_file $1 $2 $FILE
 done
+for FILE in `find . -name '*.lyr' -type f -print`; do
+	process_file $1 $2 $FILE
+done
 exit $ERROR
