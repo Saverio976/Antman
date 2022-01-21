@@ -78,3 +78,5 @@ fn_tests_run: fclean $(LIB_TARGET) ## Fonctional tests
 	$(MAKE) -C $(dir $(ANTMAN)) tests_bin
 	$(MAKE) -C $(dir $(GIANTMAN)) tests_bin
 	$(TEST_BASH) ./$(ANTMAN) ./$(GIANTMAN)
+	gcovr --exclude tests/
+	gcovr --exclude tests/ --branch
