@@ -6,30 +6,32 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
+GLOBAL_MAT=0
+NB_TESTS=0
+ALL_TESTS_NB=0
+
 function process_file () {
-	FILE_TEST=$3
+	FILE_TEST="$3"
 
-	echo process : $FILE_TEST ...
+	echo -n "process : $FILE_TEST ... "
 
-	$1 "$FILE_TEST" 1 > "$FILE_TEST.antman"
+	ALL_TESTS_NB=$(($ALL_TESTS_NB+1))
+
+	"$1" "$FILE_TEST" 1 > "$FILE_TEST.antman"
 
 	if [[ $? != 0 ]]; then
-		exit 1
+		echo "error executing::" "$1" "$FILE_TEST" 1 > "$FILE_TEST.antman"
+		ERROR=1
+		return
 	fi
 
-	$2 "$FILE_TEST.antman" 1 > "$FILE_TEST.giantman"
+	"$2" "$FILE_TEST.antman" 1 > "$FILE_TEST.giantman"
 
 	if [[ $? != 0 ]];then
-		exit 1
+		echo "error executing::" "$2" "$FILE_TEST.antman" 1 > "$FILE_TEST.giantman"
+		ERROR=1
+		return
 	fi
-
-	ORIG=`/usr/bin/du $FILE_TEST -b | cut -f1`
-	NEW=`/usr/bin/du $FILE_TEST.antman -b | cut -f1`
-
-	MAT=$(($NEW*100))
-	MAT=$(($MAT/$ORIG))
-
-	echo The file was compressed and reduced to $MAT% of its original size
 
 	DIFF=`diff $FILE_TEST $FILE_TEST.giantman`
 	if [[ $? != 0 ]]; then
@@ -37,9 +39,17 @@ function process_file () {
 		echo $DIFF
 		ERROR=1
 	else
-		echo -e $GREEN [v] $FILE $RESET
+		ORIG=`/usr/bin/du $FILE_TEST -b | cut -f1`
+		NEW=`/usr/bin/du $FILE_TEST.antman -b | cut -f1`
+
+		MAT=$(($NEW*100))
+		MAT=$(($MAT/$ORIG))
+		echo -n "The file is now $MAT% of its original size"
+		GLOBAL_MAT=$(($GLOBAL_MAT+$MAT))
+		NB_TESTS=$(($NB_TESTS+1))
+
+		echo -e "$GREEN [v] $FILE $RESET"
 	fi
-	echo
 }
 
 for FILE in `find . -name '*.txt' -type f -print`; do
@@ -48,4 +58,13 @@ done
 for FILE in `find . -name '*.lyr' -type f -print`; do
 	process_file $1 $2 $FILE
 done
+
+echo ""
+echo "::: => __Stats For TXT and LYR files__:"
+echo -e "Number of tests passed: $GREEN$NB_TESTS$RESET/$ALL_TESTS_NB"
+_TMP=$(($GLOBAL_MAT/$NB_TESTS))
+_TMP=$((100-$_TMP))
+echo -e "Compression ratio: $GREEN -$_TMP% $RESET"
+echo ""
+
 exit $ERROR
