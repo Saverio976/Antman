@@ -79,4 +79,5 @@ fn_tests_run: fclean $(LIB_TARGET) ## Fonctional tests
 	$(MAKE) -C $(dir $(GIANTMAN)) tests_bin
 	$(TEST_BASH) ./$(ANTMAN) ./$(GIANTMAN)
 	gcovr --exclude tests/ --merge-mode-function=separate || echo 'no gcovr'
-	gcovr --exclude tests/ --branch --merge-mode-function=separate || echo 'no gcovr'
+	gcovr --exclude tests/ --branch --merge-mode-function=separate || \
+		echo 'no gcovr'
