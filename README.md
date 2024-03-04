@@ -2,6 +2,14 @@
 
 lossless (un)compress files
 
+## Performance
+
+*measured with `make tests_run`*
+
+- HTML files: `-33%` to the original file size
+- PPM files: `-66%` to the original file size
+- TXT and LYR files: `-21%` to the original file size
+
 ## Installation
 
 - install deps:
@@ -28,14 +36,6 @@ make
 ```bash
 ./giantman/giantman ./path/to/file 1 > ./file_uncompressed
 ```
-
-## Performance
-
-*measured with `make tests_run`*
-
-- HTML files: `-33%` to the original file size
-- PPM files: `-66%` to the original file size
-- TXT and LYR files: `-21%` to the original file size
 
 ## Contributors
 
